@@ -7,11 +7,11 @@ import { Component } from '@angular/core';
   styleUrl: './home.scss',
 })
 export class Home {
-  public title = 'Workshops Application';
-  public count = 0;
+  // public title = 'Workshops Application';
+  // public count = 0;
 
-  public changeTitle() {
-    this.title = "My first Angular Application";
-    ++this.count;
-  }
+  // public changeTitle() {
+  //   this.title = "My first Angular Application";
+  //   ++this.count;
+  // }
 }
