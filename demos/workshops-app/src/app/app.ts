@@ -2,10 +2,11 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
 import { Menu } from './menu/menu'
+import { Home } from './home/home';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, NgbAlert, Menu],
+  imports: [RouterOutlet, NgbAlert, Menu, Home],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
