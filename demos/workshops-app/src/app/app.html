@@ -1,0 +1,15 @@
+<!-- <ngb-alert type="info" *ngIf="isOpen" (closed)="isOpen = !isOpen"> -->
+
+  @if ( isOpen ) {
+    <ngb-alert type="info" (closed)="toggle()">
+      Note that this app is built using Angular 18. The APIs in Angular <= 16 are
+      significantly different.
+    </ngb-alert>
+  }
+
+<app-menu></app-menu>
+<h1>Hello {{ title }}</h1>
+<button (click)="changeTitle()">Change the title</button>
+
+<!-- Exercise -->
+<span>You have clicked this button <span>{{ numClicks }}</span> times</span>
