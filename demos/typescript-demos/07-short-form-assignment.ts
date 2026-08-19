@@ -7,9 +7,9 @@ class Person implements IPerson {
     company!: string;
 
     constructor( public name : string, public readonly age : number, private aadhaarNumber : string ) {
-        this.name = name;
-        this.age = age;
-        this.aadhaarNumber = aadhaarNumber;
+        // this.name = name;
+        // this.age = age;
+        // this.aadhaarNumber = aadhaarNumber;
     }
 }
 

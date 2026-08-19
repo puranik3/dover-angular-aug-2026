@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Workshops } from '../workshops';
 
 @Component({
   selector: 'app-workshops-list',
@@ -6,4 +7,16 @@ import { Component } from '@angular/core';
   templateUrl: './workshops-list.html',
   styleUrl: './workshops-list.scss',
 })
-export class WorkshopsList {}
+export class WorkshopsList implements OnInit {
+  //  w : Workshops;
+
+  constructor( private w: Workshops ) {
+    // this.w = w;
+  }
+
+  ngOnInit() {
+    // we don't create out own service object
+    // new Workshops();
+    this.w.getWorkshops();
+  }
+}
