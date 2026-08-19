@@ -7,7 +7,9 @@ import { routes as workshopsRoutes } from './workshops/workshops.routes';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
-    provideRouter(routes),
-    provideRouter(workshopsRoutes)
+
+    // IMPORTANT: Order matters here...
+    provideRouter(workshopsRoutes),
+    provideRouter(routes)
   ]
 };
