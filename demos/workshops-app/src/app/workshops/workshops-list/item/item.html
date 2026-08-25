@@ -9,8 +9,7 @@
         <div>{{ workshop.time }}</div>
         <div>{{ workshop.startDate | date:"EEEE, MMMM d, y" }} - {{ workshop.endDate | date:"EEEE, MMMM d, y" }}</div>
         <div>
-          {{ workshop.location.address }}, {{ workshop.location.city }},
-          {{ workshop.location.state }}
+          {{ workshop.location | location:'short':50}}
         </div>
       </div>
       <a
