@@ -1,12 +1,10 @@
 <!--
     Handling successful fetch of workshops - Show the workshops
 -->
+<button (click)="refresh()">Click to refresh</button>
+
 @if(loading) {
-    <div class="d-flex justify-content-center">
-        <div class="spinner-border" role="status">
-            <span class="visually-hidden">Loading...</span>
-        </div>
-    </div>
+    <app-loading-spinner></app-loading-spinner>
 } @else if( !loading && error ) {
     <ngb-alert type="danger">{{ error.message }}</ngb-alert>
 } @else {

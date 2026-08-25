@@ -12,6 +12,6 @@ export class Workshops {
 
   getWorkshops() {
     // this.http.get(), post() etc. return an RxJS Observable object
-    return this.http.get<IWorkshop[]>(`https://workshops-server.onrender.com/workshops`);
+    return this.http.get<IWorkshop[]>(`https://workshops-server.onrender.com/workshop`);
   }
 }

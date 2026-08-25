@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Workshops } from '../workshops';
 import IWorkshop from '../models/IWorkshop';
 import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
+import { LoadingSpinner } from '../../common/loading-spinner/loading-spinner';
 
 @Component({
   selector: 'app-workshops-list',
-  imports: [NgbAlert],
+  imports: [NgbAlert, LoadingSpinner],
   templateUrl: './workshops-list.html',
   styleUrl: './workshops-list.scss',
 })
@@ -32,5 +33,9 @@ export class WorkshopsList implements OnInit {
         this.loading = false;
       }
     });
+  }
+
+  refresh() {
+    console.log( 'refresh' );
   }
 }
