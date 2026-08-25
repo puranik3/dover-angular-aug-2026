@@ -17,6 +17,7 @@ interface IWorkshop {
     category: Category,
     id: number,
     description: string,
+    startDate: string;
     endDate: string,
     time: string,
     location: ILocation,
