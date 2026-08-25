@@ -5,6 +5,7 @@ import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
 import { LoadingSpinner } from '../../common/loading-spinner/loading-spinner';
 import { ErrorAlert } from '../../common/error-alert/error-alert';
 import { Item } from './item/item';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-workshops-list',
@@ -23,7 +24,11 @@ export class WorkshopsList implements OnInit {
   loading = true;
   page = 1;
 
-  constructor( private w: Workshops ) {
+  constructor(
+    private w: Workshops,
+    private router: Router,
+    private activatedRoute: ActivatedRoute
+  ) {
     // this.w = w;
   }
 
@@ -46,9 +51,26 @@ export class WorkshopsList implements OnInit {
     );
   }
 
+  // caaled as soon as the component loads
   ngOnInit() {
       this.getWorkshops();
-  }
+
+      // this.activatedRoute.queryParamMap is an Observable that tracks changes to the query string -> thus whenever `page` in the query string changes, the next() method is called
+      this.activatedRoute.queryParamMap.subscribe({
+          next: (queryParams) => {
+              const queryStr = queryParams.get('page');
+
+              // when the page loads for the first time, there is no `page` query string parameter -> so we set page to 1. Later on there is some `page` value
+              if (queryStr === null) {
+                  this.page = 1;
+              } else {
+                  this.page = +queryStr; // convert `page` from string type to number
+              }
+
+              this.getWorkshops(); // page has changed -> get fresh data
+          },
+      });
+    }
 
   changePage(by: number) {
     if (this.page == 1 && by < 0) {
@@ -57,7 +79,16 @@ export class WorkshopsList implements OnInit {
 
     this.page = this.page + by;
     
-    this.getWorkshops();
+    // this.getWorkshops();
+
+    // set the query string in the route
+    this.router.navigate(
+      ['/workshops'],
+      {
+        queryParams: {
+            page: this.page,
+        },
+    });
   }
 
   refresh() {
