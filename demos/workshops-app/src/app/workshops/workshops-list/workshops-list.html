@@ -13,10 +13,12 @@
 
         <p> Number of workshops = {{ workshops.length }}</p>
 
-        @for( workshop of workshops; track workshop.id ) {
-            <div class="col-12 col-md-4 my-3 d-flex">
-                <app-item [workshop]="workshop"></app-item>
-            </div>
-        }
+        <div class="row">
+            @for( workshop of workshops; track workshop.id ) {
+                <div class="col col-12 col-md-4 my-3 d-flex">
+                    <app-item [workshop]="workshop"></app-item>
+                </div>
+            }
+        </div>
     </div>
 }
