@@ -3,10 +3,11 @@ import { Workshops } from '../workshops';
 import IWorkshop from '../models/IWorkshop';
 import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
 import { LoadingSpinner } from '../../common/loading-spinner/loading-spinner';
+import { ErrorAlert } from '../../common/error-alert/error-alert';
 
 @Component({
   selector: 'app-workshops-list',
-  imports: [NgbAlert, LoadingSpinner],
+  imports: [NgbAlert, LoadingSpinner, ErrorAlert],
   templateUrl: './workshops-list.html',
   styleUrl: './workshops-list.scss',
 })

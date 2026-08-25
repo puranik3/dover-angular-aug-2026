@@ -6,7 +6,7 @@
 @if(loading) {
     <app-loading-spinner></app-loading-spinner>
 } @else if( !loading && error ) {
-    <ngb-alert type="danger">{{ error.message }}</ngb-alert>
+    <app-error-alert [err]="error"></app-error-alert>
 } @else {
     <div>
         <h1> List of workshops</h1>
