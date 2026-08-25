@@ -1,22 +1,36 @@
 import { Component, OnInit } from '@angular/core';
 import { Workshops } from '../workshops';
+import IWorkshop from '../models/IWorkshop';
+import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-workshops-list',
-  imports: [],
+  imports: [NgbAlert],
   templateUrl: './workshops-list.html',
   styleUrl: './workshops-list.scss',
 })
 export class WorkshopsList implements OnInit {
-  //  w : Workshops;
+  workshops! : IWorkshop[];
+  error!: Error;
+  loading: boolean = true;
 
   constructor( private w: Workshops ) {
     // this.w = w;
   }
 
   ngOnInit() {
-    // we don't create out own service object
+    // we don't create our own service object
     // new Workshops();
-    this.w.getWorkshops();
+    // only when we subscrive to the returned Observable is the HTTP GET request made
+    this.w.getWorkshops().subscribe({
+      next: ( workshops ) => {
+        this.workshops = workshops;
+        this.loading = false;
+      },
+      error: ( error ) => {
+        this.error = error;
+        this.loading = false;
+      }
+    });
   }
 }
