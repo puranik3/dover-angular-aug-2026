@@ -10,8 +10,15 @@ export class Workshops {
   constructor( private http: HttpClient ) {
   }
 
-  getWorkshops() {
+  getWorkshops( page: number = 1  ) {
     // this.http.get(), post() etc. return an RxJS Observable object
-    return this.http.get<IWorkshop[]>(`https://workshops-server.onrender.com/workshops`);
+    return this.http.get<IWorkshop[]>(
+      `https://workshops-server.onrender.com/workshops`,
+    {
+        params: {
+          _page: page
+        }
+      }
+    );
   }
 }

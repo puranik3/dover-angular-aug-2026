@@ -20,26 +20,44 @@ import { Item } from './item/item';
 export class WorkshopsList implements OnInit {
   workshops! : IWorkshop[];
   error!: Error;
-  loading: boolean = true;
+  loading = true;
+  page = 1;
 
   constructor( private w: Workshops ) {
     // this.w = w;
   }
 
+  getWorkshops() {
+    this.loading = true;
+
+    this.w.getWorkshops(this.page).subscribe(
+        {
+            next: (workshops) => {
+                this.workshops = workshops;
+                this.loading = false;
+                console.log(workshops);
+            },
+            error: (error) => {
+                this.error = error;
+                this.loading = false;
+                console.log(error);
+            },
+        }
+    );
+  }
+
   ngOnInit() {
-    // we don't create our own service object
-    // new Workshops();
-    // only when we subscrive to the returned Observable is the HTTP GET request made
-    this.w.getWorkshops().subscribe({
-      next: ( workshops ) => {
-        this.workshops = workshops;
-        this.loading = false;
-      },
-      error: ( error ) => {
-        this.error = error;
-        this.loading = false;
-      }
-    });
+      this.getWorkshops();
+  }
+
+  changePage(by: number) {
+    if (this.page == 1 && by < 0) {
+        return;
+    }
+
+    this.page = this.page + by;
+    
+    this.getWorkshops();
   }
 
   refresh() {
