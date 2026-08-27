@@ -6,6 +6,7 @@ import { LoadingSpinner } from '../../common/loading-spinner/loading-spinner';
 import { ErrorAlert } from '../../common/error-alert/error-alert';
 import { Item } from './item/item';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Pagination } from '../../common/pagination/pagination';
 
 @Component({
   selector: 'app-workshops-list',
@@ -13,7 +14,8 @@ import { Router, ActivatedRoute } from '@angular/router';
     NgbAlert,
     LoadingSpinner,
     ErrorAlert,
-    Item
+    Item,
+    Pagination
   ],
   templateUrl: './workshops-list.html',
   styleUrl: './workshops-list.scss',
@@ -73,10 +75,6 @@ export class WorkshopsList implements OnInit {
     }
 
   changePage(by: number) {
-    if (this.page == 1 && by < 0) {
-        return;
-    }
-
     this.page = this.page + by;
     
     // this.getWorkshops();
