@@ -27,5 +27,26 @@
         </div>
     }
 
+    <div class="mt-5">
+        <!-- Alternatively, [routerLink]="['.']" -->
+        <button
+            [routerLink]="['.']"
+            routerLinkActive="btn-active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            class="btn btn-primary btn-sm btn-child-link me-2"
+        >
+            Sessions List
+        </button>
+        <!-- Alternatively, [routerLink]="['add-session']" -->
+        <button
+            [routerLink]="['add-session']"
+            routerLinkActive="btn-active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            class="btn btn-primary btn-sm btn-child-link"
+        >
+            Add a session
+        </button>
+    </div>
+
     <router-outlet></router-outlet>
 </div>
