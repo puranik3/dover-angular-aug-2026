@@ -4,6 +4,8 @@ import { WorkshopsList } from './workshops-list/workshops-list';
 import { AddWorkshop } from './add-workshop/add-workshop';
 import { Favorites } from './favorites/favorites';
 import { WorkshopDetails } from './workshop-details/workshop-details';
+import { SessionsList } from './workshop-details/sessions-list/sessions-list';
+import { AddSession } from './workshop-details/add-session/add-session';
 
 export const routes: Routes = [
     {
@@ -24,6 +26,16 @@ export const routes: Routes = [
     {
         path: 'workshops/:id',
         component: WorkshopDetails,
-        title: 'Workshop Details'
+        title: 'Workshop Details',
+        children: [
+            {
+                path: '',
+                component: SessionsList
+            },
+            {
+                path: 'add-session',
+                component: AddSession
+            }
+        ]
     }
 ];

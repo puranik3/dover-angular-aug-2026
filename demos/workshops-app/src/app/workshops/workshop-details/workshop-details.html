@@ -1,26 +1,31 @@
-@if(loading()) {
-    <app-loading-spinner variant="success"></app-loading-spinner>
-} @else if(!loading() && error()) {
-    <app-error-alert [err]="error()"></app-error-alert>
-} @else {
-    <h1>{{ workshop()?.name }}</h1>
+<div>
+    @if(loading()) {
+        <app-loading-spinner variant="success"></app-loading-spinner>
+    } @else if(!loading() && error()) {
+        <app-error-alert [err]="error()"></app-error-alert>
+    } @else {
+        <h1>{{ workshop()?.name }}</h1>
 
-    <hr />
+        <hr />
 
-    <div class="row">
-        <div class="col-12 col-md-4">
-            <img [src]="workshop()?.imageUrl" [alt]="workshop()?.name" class="img-fluid" />
-        </div>
-        <div class="col-12 col-md-8">
-            <div class="my-3">
-                <div>{{ workshop()?.time }}</div>
-                <div>
-                    {{ workshop()?.startDate | date : "EEEE, MMMM d, y" }} -
-                    {{ workshop()?.endDate | date : "EEEE, MMMM d, y" }}
-                </div>
-                <div>{{ workshop()?.location | location }}</div>
+        <div class="row">
+            <div class="col-12 col-md-4">
+                <img [src]="workshop()?.imageUrl" [alt]="workshop()?.name" class="img-fluid" />
             </div>
-            <div [innerHTML]="workshop()?.description"></div>
+            <div class="col-12 col-md-8">
+                <div class="my-3">
+                    <div>{{ workshop()?.time }}</div>
+                    <div>
+                        {{ workshop()?.startDate | date : "EEEE, MMMM d, y" }} -
+                        {{ workshop()?.endDate | date : "EEEE, MMMM d, y" }}
+                    </div>
+                    <div>{{ workshop()?.location | location }}</div>
+                </div>
+                <!-- Explore: XSS attacks are prevented when using {{}} -->
+                <div [innerHTML]="workshop()?.description"></div>
+            </div>
         </div>
-    </div>
-}
+    }
+
+    <router-outlet></router-outlet>
+</div>

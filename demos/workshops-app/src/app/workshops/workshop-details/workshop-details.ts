@@ -6,6 +6,7 @@ import { LoadingSpinner } from '../../common/loading-spinner/loading-spinner';
 import { ErrorAlert } from '../../common/error-alert/error-alert';
 import { DatePipe } from '@angular/common';
 import { LocationPipe } from '../../common/location-pipe';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-workshop-details',
@@ -13,7 +14,8 @@ import { LocationPipe } from '../../common/location-pipe';
     LoadingSpinner,
     ErrorAlert,
     DatePipe,
-    LocationPipe
+    LocationPipe,
+    RouterModule
   ],
   templateUrl: './workshop-details.html',
   styleUrl: './workshop-details.scss',

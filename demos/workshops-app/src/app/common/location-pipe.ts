@@ -6,11 +6,11 @@ import { ILocation } from '../workshops/models/IWorkshop';
 })
 export class LocationPipe implements PipeTransform {
   transform(
-    location: ILocation,
+    location: ILocation | undefined,
     format: 'short' | 'long' = 'long',
     numChars = 80
   ): unknown {
-    let locationStr = `${location.address}, ${location.city}, ${location.state}`;
+    let locationStr = `${location?.address}, ${location?.city}, ${location?.state}`;
 
     if (format === 'short') {
       let locationStrTemp = locationStr.substring(0, numChars);
