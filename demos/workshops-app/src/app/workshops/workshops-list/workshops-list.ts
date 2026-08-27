@@ -8,6 +8,8 @@ import { Item } from './item/item';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Pagination } from '../../common/pagination/pagination';
 
+import { FormsModule } from '@angular/forms';
+
 @Component({
   selector: 'app-workshops-list',
   imports: [
@@ -15,16 +17,20 @@ import { Pagination } from '../../common/pagination/pagination';
     LoadingSpinner,
     ErrorAlert,
     Item,
-    Pagination
+    Pagination,
+    FormsModule
   ],
   templateUrl: './workshops-list.html',
   styleUrl: './workshops-list.scss',
 })
 export class WorkshopsList implements OnInit {
   workshops! : IWorkshop[];
+  filteredWorkshops! : IWorkshop[];
   error!: Error;
   loading = true;
   page = 1;
+
+  filterKey = "";
 
   constructor(
     private w: Workshops,
@@ -41,6 +47,7 @@ export class WorkshopsList implements OnInit {
         {
             next: (workshops) => {
                 this.workshops = workshops;
+                this.filteredWorkshops = workshops;
                 this.loading = false;
                 console.log(workshops);
             },
@@ -91,5 +98,11 @@ export class WorkshopsList implements OnInit {
 
   refresh() {
     console.log( 'refresh' );
+  }
+
+  filterWorkshops() {
+    this.filteredWorkshops = this.workshops.filter((w) =>
+        w.name.toLowerCase().includes(this.filterKey.toLowerCase())
+    );
   }
 }
