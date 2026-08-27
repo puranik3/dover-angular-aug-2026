@@ -9,5 +9,5 @@ import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
 })
 export class ErrorAlert {
   @Input("err")
-  error!: Error;
+  error!: Error | null;
 }

@@ -1,1 +1,3 @@
-<ngb-alert type="danger">{{ error.message }}</ngb-alert>
+@if ( error ) {
+    <ngb-alert type="danger">{{ error.message }}</ngb-alert>
+}
