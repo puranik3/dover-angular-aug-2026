@@ -12,6 +12,10 @@
                     class="col-1 d-flex flex-column justify-content-center align-items-center"
                 >
                     <!-- @todo voting widget -->
+                     <app-voting-widget
+                        [votes]="s.upvoteCount"
+                        (vote)="updateVote(s, $event)"
+                    ></app-voting-widget>
                 </div>
                 <div class="col-11">
                     <h3>{{ s.name }}</h3>

@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Sessions } from '../../sessions';
 import ISession from '../../models/ISession';
+import { VotingWidget } from '../../../common/voting-widget/voting-widget';
 
 @Component({
     selector: 'app-sessions-list',
     standalone: true,
-    imports: [],
+    imports: [ VotingWidget ],
     templateUrl: './sessions-list.html',
     styleUrl: './sessions-list.scss',
 })
@@ -38,5 +39,9 @@ export class SessionsList implements OnInit {
 
     refresh() {
         console.log( "refresh" );
+    }
+
+    updateVote(session :ISession, by: number) {
+        console.log( session, by === 1 ? 'upvote' : 'downvote' );
     }
 }
