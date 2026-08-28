@@ -43,5 +43,15 @@ export class SessionsList implements OnInit {
 
     updateVote(session :ISession, by: number) {
         console.log( session, by === 1 ? 'upvote' : 'downvote' );
+    
+        this.sessionsService
+            .voteForSession(session.id, by === 1 ? 'upvote' : 'downvote')
+            .subscribe({
+                next: (updatedSession) => {
+                    // updating the specific session item in the sessions array
+                    session.upvoteCount = updatedSession.upvoteCount;
+                },
+                // @todo handle error
+            });
     }
 }
