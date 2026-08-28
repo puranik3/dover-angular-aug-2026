@@ -4,9 +4,12 @@ import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
 import { Menu } from './menu/menu'
 import { Home } from './home/home';
 
+// IMPORTANT: This is the component, not the service
+import { Toast } from './common/toast/toast';
+
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, NgbAlert, Menu, Home],
+  imports: [RouterOutlet, NgbAlert, Menu, Home, Toast],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })

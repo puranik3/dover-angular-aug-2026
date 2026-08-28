@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Sessions } from '../../sessions';
 import ISession from '../../models/ISession';
 import { VotingWidget } from '../../../common/voting-widget/voting-widget';
+
+// IMPORTANT: This is the service, and not the component
+import { Toast } from '../../../common/toast';
 
 @Component({
     selector: 'app-sessions-list',
@@ -14,6 +17,8 @@ import { VotingWidget } from '../../../common/voting-widget/voting-widget';
 export class SessionsList implements OnInit {
     workshopId!: number;
     sessions!: ISession[];
+
+    private toastService = inject(Toast)
 
     constructor(
         private sessionsService: Sessions,
@@ -50,8 +55,21 @@ export class SessionsList implements OnInit {
                 next: (updatedSession) => {
                     // updating the specific session item in the sessions array
                     session.upvoteCount = updatedSession.upvoteCount;
+
+                    this.toastService.add({
+                        message: 'Your vote has been captured',
+                        className: 'bg-success text-light',
+                        duration: 5000
+                    });
                 },
                 // @todo handle error
+                error: (error) => {
+                    this.toastService.add({
+                        message: error.message,
+                        className: 'bg-danger text-light',
+                        duration: 5000
+                    });
+                }
             });
     }
 }
