@@ -5,3 +5,8 @@
 
 /* Importing Bootstrap SCSS file. */
 @import 'bootstrap/scss/bootstrap';
+
+.error-message {
+    color: crimson;
+    font-size: 0.85em;
+}
