@@ -1,12 +1,52 @@
 import { Component } from '@angular/core';
 import { JsonPipe } from '@angular/common';
 import { ReactiveFormsModule, NgForm, FormGroup,
-    FormControl, Validators, FormBuilder } from '@angular/forms';
+    FormControl, Validators, FormBuilder, AbstractControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Toast } from '../../../common/toast';
 
 import { Sessions } from '../../sessions';
 import ISession from '../../models/ISession';
+
+function durationAndLevel(form: AbstractControl) {
+    const durationStr = (form.get('duration') as AbstractControl).value;
+    const duration = +durationStr;
+    const level = (form.get('level') as AbstractControl).value;
+    
+    // if valid -> return null
+    // if invalid -> return an object with the details of the error. Further this object should have the property called `durationAndLevel`
+    if (durationStr === '' || level === '') {
+        return null; // valid
+    }
+    
+    if (level === 'Basic') {
+        return null; // no duration validation for Basic level course
+    }
+    
+    if (level === 'Intermediate') {
+        if (duration >= 2) {
+            return null; // valid
+        }
+        
+        // error
+        return {
+            durationAndLevel: 'Intermediate level session should be at least 2 hours in duration',
+        };
+    }
+
+    if (level === 'Advanced') {
+        if (duration >= 3) {
+            return null; // valid
+        }
+
+        // error
+        return {
+            durationAndLevel: 'Advanced level session should be at least 3 hours in duration',
+        };
+    }
+
+    return null;
+}
 
 @Component({
   selector: 'app-add-session',
@@ -50,6 +90,8 @@ export class AddSession {
         ],
         level: ['', [Validators.required]],
         abstract: ['', [Validators.required, Validators.minLength(20)]],
+    }, { // cross-field validators are set up on the form object (not on individual form controls)
+        validators: durationAndLevel,
     });
   }
 
