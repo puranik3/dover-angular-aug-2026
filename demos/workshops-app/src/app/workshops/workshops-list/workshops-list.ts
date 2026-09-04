@@ -10,6 +10,14 @@ import { Pagination } from '../../common/pagination/pagination';
 
 import { FormsModule } from '@angular/forms';
 
+import { DatePipe } from '@angular/common';
+
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faPencil, faTrash, faStar } from '@fortawesome/free-solid-svg-icons';
+import { faStar as faStarEmpty } from '@fortawesome/free-regular-svg-icons';
+import { FavoritesService } from '../favorites';
+import { Toast } from '../../common/toast';
+
 @Component({
   selector: 'app-workshops-list',
   imports: [
@@ -18,7 +26,9 @@ import { FormsModule } from '@angular/forms';
     ErrorAlert,
     Item,
     Pagination,
-    FormsModule
+    FormsModule,
+    FontAwesomeModule,
+    DatePipe
   ],
   templateUrl: './workshops-list.html',
   styleUrl: './workshops-list.scss',
@@ -32,10 +42,19 @@ export class WorkshopsList implements OnInit {
 
   filterKey = "";
 
+  icons = {
+    faPencil,
+    faTrash,
+    faStar,
+    faStarEmpty,
+  };
+
   constructor(
     private w: Workshops,
     private router: Router,
     private activatedRoute: ActivatedRoute,
+    public favoritesService: FavoritesService,
+    private toastService: Toast
   ) {
     // this.w = w;
   }

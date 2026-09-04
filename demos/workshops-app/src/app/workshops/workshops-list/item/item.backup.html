@@ -1,0 +1,42 @@
+<div class="card workshop-card w-100 p-3 text-center">
+  <span>
+    <fa-icon
+      [icon]="
+        favoritesService.isFavorite(workshop.id)
+          ? icons.faStar
+          : icons.faStarEmpty
+      "
+      class="favorite text-success"
+      (click)="favoritesService.toggleFavorite(workshop)"
+    ></fa-icon>
+  </span>
+  <div class="card-img-wrapper">
+    <img [src]="workshop.imageUrl" [alt]="workshop.name" class="card-img-top" />
+  </div>
+  <div class="card-body">
+    <div>
+      <h5 class="card-title">{{ workshop.name }}</h5>
+      <div class="workshop-location">
+        {{ workshop.location.address }}, {{ workshop.location.city }},
+        {{ workshop.location.state }}
+      </div>
+      <strong class="workshop-duration">
+        {{ workshop.startDate | date : "mediumDate" }} -
+        {{ workshop.endDate | date : "mediumDate" }},
+      </strong>
+    </div>
+    <div>
+      <a [routerLink]="['/workshops/edit', workshop.id]">
+        <fa-icon [icon]="icons.faPencil" class="me-2 text-success"></fa-icon>
+      </a>
+      <fa-icon [icon]="icons.faTrash" class="text-danger" (click)="deleteWorkshop()"></fa-icon>
+    </div>
+    <!-- <div class="card-text" [innerHTML]="workshop.description"></div> -->
+    <a
+      class="btn btn-primary btn-sm mt-4"
+      [routerLink]="[workshop.id]"
+      [attr.aria-label]="'Know more about ' + workshop.name"
+      >Know more</a
+    >
+  </div>
+</div>

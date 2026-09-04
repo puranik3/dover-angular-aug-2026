@@ -23,13 +23,14 @@ export class Workshops {
         params: {
           _page: page
         }
-      }
+      },
+      
     );
   }
 
   getWorkshopById(workshopId: number) {
     return this.http.get<IWorkshop>(
-        `${this.apiUrl}/workshops/${workshopId}`
+        `${this.apiUrl}/workshops/${workshopId}`,
     );
   }
 }

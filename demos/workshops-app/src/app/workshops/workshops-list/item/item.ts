@@ -21,14 +21,14 @@ export class Item {
   @Input()
   workshop!: IWorkshop;
 
-  icons = {
-    faPencil,
-    faTrash,
-    faStar,
-    faStarEmpty,
-  };
+  // icons = {
+  //   faPencil,
+  //   faTrash,
+  //   faStar,
+  //   faStarEmpty,
+  // };
 
-  constructor(public favoritesService: FavoritesService) {
+  // constructor(public favoritesService: FavoritesService) {
 
-  }
+  // }
 }

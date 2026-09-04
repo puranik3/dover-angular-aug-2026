@@ -3,41 +3,88 @@
 -->
 <button (click)="refresh()">Click to refresh</button>
 
-@if(loading) {
-    <app-loading-spinner></app-loading-spinner>
-} @else if( !loading && error ) {
-    <app-error-alert [err]="error"></app-error-alert>
+@if (loading) {
+  <app-loading-spinner></app-loading-spinner>
+} @else if (!loading && error) {
+  <app-error-alert [err]="error"></app-error-alert>
 } @else {
-    <div>
-        <h1> List of workshops</h1>
+  <div>
+    <h1>List of workshops</h1>
 
-        <p> Number of workshops = {{ workshops.length }}</p>
+    <p>Number of workshops = {{ workshops.length }}</p>
 
-        <div class="my-2">
-            <app-pagination [page]="page" (pageChange)="changePage($event)"></app-pagination>
-        </div>
-
-        <input
-            type="search"
-            class="form-control"
-            placeholder="Type to search by name"
-            [(ngModel)]="filterKey"
-            (input)="filterWorkshops()"
-        />
-
-        @if ( filterKey !== '' ) {
-            <div>
-                Workshops whose name has
-                <span class="text-primary">{{ filterKey }}</span> are shown.
-            </div>
-        }
-
-        <div class="row">
-            @for( workshop of filteredWorkshops; track workshop.id ) {
-                <div class="col col-12 col-md-4 my-3 d-flex">
-                    <app-item [workshop]="workshop"></app-item>
-                </div>
-            }
-        </div>
+    <div class="my-2">
+      <app-pagination [page]="page" (pageChange)="changePage($event)"></app-pagination>
     </div>
+
+    <input
+      type="search"
+      class="form-control"
+      placeholder="Type to search by name"
+      [(ngModel)]="filterKey"
+      (input)="filterWorkshops()"
+    />
+
+    @if (filterKey !== '') {
+      <div>
+        Workshops whose name has
+        <span class="text-primary">{{ filterKey }}</span> are shown.
+      </div>
+    }
+
+    <div class="row">
+      @for (workshop of filteredWorkshops; track workshop.id) {
+        <div class="col col-12 col-md-4 my-3 d-flex">
+          <app-item [workshop]="workshop">
+            <!-- HEADER -->
+            <div item-header class="d-flex justify-content-between align-items-center">
+              <h5 class="card-title mb-0">{{ workshop.name }}</h5>
+              <span>
+                <fa-icon
+                  [icon]="
+                    favoritesService.isFavorite(workshop.id) ? icons.faStar : icons.faStarEmpty
+                  "
+                  class="favorite text-success"
+                  (click)="favoritesService.toggleFavorite(workshop)"
+                >
+                </fa-icon>
+              </span>
+            </div>
+
+            <!-- BODY -->
+            <div item-body>
+              <img [src]="workshop.imageUrl" [alt]="workshop.name" class="card-img-top mb-2" />
+              <div class="workshop-location">
+                {{ workshop.location.address }}, {{ workshop.location.city }},
+                {{ workshop.location.state }}
+              </div>
+              <strong class="workshop-duration">
+                {{ workshop.startDate | date: 'mediumDate' }} -
+                {{ workshop.endDate | date: 'mediumDate' }}
+              </strong>
+            </div>
+
+            <!-- FOOTER<div item-footer class="d-flex justify-content-between align-items-center">
+              <a [routerLink]="['/workshops/edit', workshop.id]">
+                <fa-icon [icon]="icons.faPencil" class="text-success"></fa-icon>
+              </a>
+              <fa-icon
+                [icon]="icons.faTrash"
+                class="text-danger"
+                (click)="deleteWorkshop(workshop)"
+              ></fa-icon>
+              <a
+                class="btn btn-primary btn-sm"
+                [routerLink]="[workshop.id]"
+                [attr.aria-label]="'Know more about ' + workshop.name"
+              >
+                Know more
+              </a>
+            </div> -->
+            
+          </app-item>
+        </div>
+      }
+    </div>
+  </div>
 }
