@@ -677,6 +677,18 @@
       "upvoteCount": 0,
       "createdDate": "Sep 04, 2026",
       "id": 50
+    },
+    {
+      "sequenceId": 12,
+      "name": "Some new topic",
+      "speaker": "John John",
+      "duration": 10,
+      "level": "Advanced",
+      "abstract": "New session new session",
+      "workshopId": 2,
+      "upvoteCount": 0,
+      "createdDate": "Sep 04, 2026",
+      "id": 51
     }
   ],
   "users": [
