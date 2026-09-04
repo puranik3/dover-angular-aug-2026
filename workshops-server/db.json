@@ -653,6 +653,18 @@
       "upvoteCount": 0,
       "workshopId": 2,
       "createdDate": "May 23, 2025"
+    },
+    {
+      "sequenceId": 15,
+      "name": "Some new topic",
+      "speaker": "John",
+      "duration": 2.5,
+      "level": "Intermediate",
+      "abstract": "Some abstract Some abstract",
+      "workshopId": 2,
+      "upvoteCount": 0,
+      "createdDate": "Sep 04, 2026",
+      "id": 49
     }
   ],
   "users": [
