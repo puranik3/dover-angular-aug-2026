@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { JsonPipe } from '@angular/common';
 import { ReactiveFormsModule, NgForm, FormGroup,
-    FormControl, Validators } from '@angular/forms';
+    FormControl, Validators, FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Toast } from '../../../common/toast';
 
@@ -15,31 +15,43 @@ import ISession from '../../models/ISession';
   styleUrl: './add-session.scss',
 })
 export class AddSession {
-    addSessionForm = new FormGroup({
-      "sequenceId": new FormControl(
-        '', // initial value of the input
-        [
-          // the list of validators
-          Validators.required,
-          Validators.pattern('\\d+'),
-        ],
-      ),
-      "name": new FormControl('', [Validators.required, Validators.pattern('[A-Z][A-Za-z ]+')]),
-      speaker: new FormControl('', [
-        Validators.required,
-        Validators.pattern('[A-Z][A-Za-z ]+(,[A-Z ][A-Za-z ]+)*'),
-      ]),
-      duration: new FormControl('', [Validators.required, Validators.min(0.5), Validators.max(10)]),
-      level: new FormControl('', [Validators.required]),
-      abstract: new FormControl('', [Validators.required, Validators.minLength(20)]),
-    });
+  addSessionForm!: FormGroup;
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private sessionsService: Sessions,
     private router: Router,
     private toastService: Toast,
-  ) {}
+    private fb: FormBuilder
+  ) {
+    this.addSessionForm = this.fb.group({
+        sequenceId: [
+            '', // initial value of the input
+            [
+                // the list of validators
+                Validators.required,
+                Validators.pattern('\\d+'),
+            ],
+        ],
+        name: [
+            '',
+            [Validators.required, Validators.pattern('[A-Z][A-Za-z ]+')],
+        ],
+        speaker: [
+            '',
+            [
+                Validators.required,
+                Validators.pattern('[A-Z][A-Za-z ]+(,[A-Z ][A-Za-z ]+)*'),
+            ],
+        ],
+        duration: [
+            '',
+            [Validators.required, Validators.min(0.5), Validators.max(10)],
+        ],
+        level: ['', [Validators.required]],
+        abstract: ['', [Validators.required, Validators.minLength(20)]],
+    });
+  }
 
 
   // helper accessor methods
