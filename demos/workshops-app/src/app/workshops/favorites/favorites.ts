@@ -8,7 +8,7 @@ import { FavoritesService } from '../favorites';
   
   imports: [CommonModule, RouterModule, AsyncPipe],
   templateUrl: './favorites.html',
-  styleUrl: './favorites.component.css',
+  styleUrl: './favorites.scss',
 })
 export class Favorites implements OnInit {
   constructor(public favoritesService: FavoritesService) {}

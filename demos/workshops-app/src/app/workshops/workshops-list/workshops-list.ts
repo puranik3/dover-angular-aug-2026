@@ -35,7 +35,7 @@ export class WorkshopsList implements OnInit {
   constructor(
     private w: Workshops,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
   ) {
     // this.w = w;
   }
