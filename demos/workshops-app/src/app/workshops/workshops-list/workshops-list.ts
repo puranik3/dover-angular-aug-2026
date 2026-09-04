@@ -5,7 +5,7 @@ import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
 import { LoadingSpinner } from '../../common/loading-spinner/loading-spinner';
 import { ErrorAlert } from '../../common/error-alert/error-alert';
 import { Item } from './item/item';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, RouterLink } from '@angular/router';
 import { Pagination } from '../../common/pagination/pagination';
 
 import { FormsModule } from '@angular/forms';
@@ -28,7 +28,8 @@ import { Toast } from '../../common/toast';
     Pagination,
     FormsModule,
     FontAwesomeModule,
-    DatePipe
+    DatePipe,
+    RouterLink
   ],
   templateUrl: './workshops-list.html',
   styleUrl: './workshops-list.scss',

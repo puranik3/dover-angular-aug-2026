@@ -7,6 +7,9 @@ import { WorkshopDetails } from './workshop-details/workshop-details';
 import { SessionsList } from './workshop-details/sessions-list/sessions-list';
 import { AddSession } from './workshop-details/add-session/add-session';
 
+import { validateWorkshopGuard } from './validate-workshop-guard';
+
+
 export const routes: Routes = [
     {
         path: 'workshops',
@@ -26,6 +29,7 @@ export const routes: Routes = [
     {
         path: 'workshops/:id',
         component: WorkshopDetails,
+        canActivate: [validateWorkshopGuard /*, any other guards may be added here... */ ],
         title: 'Workshop Details',
         children: [
             {
