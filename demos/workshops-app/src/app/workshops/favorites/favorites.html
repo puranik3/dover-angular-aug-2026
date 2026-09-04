@@ -1,1 +1,22 @@
-<p>favorites works!</p>
+<h1>Favorites</h1>
+<hr />
+
+@if (favoritesService.favorites$ | async; as favorites) {
+  <ul>
+    @for ( favorite of favorites; track favorite.id ) {
+        <li>
+            <a [routerLink]="['/workshops', favorite.id]">
+                {{ favorite.name }}
+            </a>
+        </li>
+    }
+  </ul>
+  @if (favorites.length === 0) {
+    <div>
+    You have not marked any workshops as favorites. We hope you'll soon find
+    some that pique your interest!
+    </div>
+  }
+} @else {
+  Loading favorites...
+}
